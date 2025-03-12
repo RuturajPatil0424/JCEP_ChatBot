@@ -62,14 +62,14 @@ def ask_finetuned_llama(questionToAsk):
 
     responce = ollama.chat(model=desiredModel, messages=[{'role': 'user', 'content': f'{questionToAsk}'}])
     OllamaResponse = responce['message']['content']
-    with open("Outputfile.txt", "w", encoding="utf-8") as text_file:
+    with open("../Outputfile.txt", "w", encoding="utf-8") as text_file:
         text_file.write(OllamaResponse)
     return (OllamaResponse)
 
 
 # Function to fetch all questions and answers from the database
 def fetch_questions_answers():
-    conn = sqlite3.connect("DataBase/chat_data.db")
+    conn = sqlite3.connect("../DataBase/chat_data.db")
     cursor = conn.cursor()
     cursor.execute("SELECT question, answer FROM chat_history")
     data = cursor.fetchall()  # Fetch all (question, answer) pairs

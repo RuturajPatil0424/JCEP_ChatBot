@@ -1,58 +1,147 @@
-# JCEP Chatbot
 
-## Overview
-JCEP is an intelligent chatbot designed to answer user queries using a combination of a fine-tuned Llama model and a local SQLite database. It attempts to match user queries with stored questions and answers and, if necessary, generates a response using an AI model.
+---
 
-## Features
-- Uses SQLite to store and retrieve historical chat data.
-- Employs fuzzy matching with `fuzzywuzzy` to find the best-matching question.
-- If a match is found, it retrieves and refines the answer using a fine-tuned Llama model (`ollama`).
-- If no match is found, it constructs a prompt and queries the Llama model for a response.
-- Saves chatbot responses to `Outputfile.txt`.
+## 🚀 **JCEP AI Chatbot**
+JCEP AI Chatbot is a web-based chatbot powered by a Python backend using Flask. It allows users to ask questions through a web interface, processes the input using a fine-tuned LLaMA model, and returns intelligent responses.
 
-## Requirements
-Ensure you have the following installed:
-- Python 3.x
-- SQLite3
-- `fuzzywuzzy`
-- `ollama`
-- `sqlite3`
+---
 
-To install dependencies, run:
-```sh
-pip install fuzzywuzzy[speedup] ollama
+## 📁 **Project Structure**
+```
+project/
+├── jcep.py                    # Flask backend
+├── templates/
+│   └── index.html             # HTML frontend
+├── static/
+│   ├── styles.css             # CSS styles
+│   └── script.js              # JavaScript functionality
+├── DataBase/
+│   ├── chat_data.db           # SQLite database storing questions and answers
+│   └── images/
+│       └── jep.jpg            # Chatbot logo
+├── README.md                  # Project documentation
 ```
 
-## File Structure
-- `chat_data.db` - SQLite database storing chat history.
-- `Outputfile.txt` - Stores the chatbot's responses.
-- `main.py` - The chatbot script.
+---
 
-## How It Works
-1. The chatbot loads existing question-answer pairs from `chat_data.db`.
-2. It listens for user input.
-3. It tries to find a closely matching question from the database using `fuzzywuzzy`.
-4. If a match is found, it returns the stored answer, refining it with `ollama`.
-5. If no match is found, it queries `ollama` directly.
-6. The chatbot displays the response and logs it.
-7. The conversation continues until the user types `exit`.
+## ⚙️ **Setup Instructions**
+### 1. **Install Dependencies**
+Make sure you have Python and pip installed. Install the required Python libraries:
 
-## Running the Chatbot
-To start the chatbot, run:
-```sh
-python main.py
+```bash
+pip install flask scikit-learn ollama
 ```
 
-## Customization
-- **Threshold Adjustment**: Change the confidence threshold (`90`) in `find_best_match()` to fine-tune matching sensitivity.
-- **Database Path**: Modify the `sqlite3.connect()` line to point to a different database file.
-- **Fine-Tuned Model**: Replace `'jcepai'` with your preferred model name in `ask_finetuned_llama()`.
+---
 
-## Notes
-- Ensure `chat_data.db` exists and has a `chat_history` table with `question` and `answer` columns.
-- The chatbot requires `ollama` to be properly set up.
-- Modify `Construct_prompt()` to customize prompt formatting for the AI model.
+### 2. **Database Setup**
+1. Create a `DataBase` folder in the root directory.
+2. Add a `chat_data.db` file with the following schema:
 
-## License
-This project is for educational and personal use. Modify and distribute as needed.
+```sql
+CREATE TABLE chat_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    question TEXT NOT NULL,
+    answer TEXT NOT NULL
+);
+```
 
+3. Insert sample data:
+```sql
+INSERT INTO chat_history (question, answer) VALUES 
+('What is AI?', 'AI stands for Artificial Intelligence.');
+```
+
+---
+
+### 3. **Run Flask Server**
+Start the Flask server:
+
+```bash
+python jcep.py
+```
+
+✅ Flask should start at:  
+👉 `http://127.0.0.1:5000`
+
+---
+
+### 4. **Access the Chatbot**
+1. Open the browser and go to:
+
+```
+http://127.0.0.1:5000
+```
+
+2. Ask a question using the chat interface! ✅
+
+---
+
+## 🧠 **How It Works**
+### ✅ **Backend (Python + Flask)**
+1. Flask serves the HTML and static files.
+2. User input is sent to `/get_response` using a POST request.
+3. Python backend:
+   - Loads questions and answers from the SQLite database.
+   - Finds the best matching question using `scikit-learn`.
+   - If no match, sends the input to a fine-tuned LLaMA model using `ollama`.
+   - Returns the AI-generated response.
+
+---
+
+### ✅ **Frontend (HTML + CSS + JS)**
+1. HTML and CSS define the chatbot interface.
+2. `script.js`:
+   - Handles user input.
+   - Sends requests to Flask using `fetch`.
+   - Displays responses in the chat window.
+   - Opens/closes the chatbot window using a button.
+
+---
+
+## 🏆 **Key Features**
+✔️ AI-driven responses using LLaMA  
+✔️ scikit-learn matching for user input  
+✔️ Clean and responsive chat interface  
+✔️ Python-based backend  
+✔️ Flask for web server and routing  
+
+---
+
+## 📸 **Screenshots**
+| Opened Chatbot                       | Closed Chatbot                        |
+|--------------------------------------|---------------------------------------|
+| ![Opened](static/images/openjep.png) | ![Opened](static/images/closejep.png) |
+
+---
+
+## 🚨 **Troubleshooting**
+| Issue | Solution |
+|-------|----------|
+| CSS not loading | Ensure CSS is in the `static` folder and `url_for` is set correctly |
+| Database not found | Make sure `chat_data.db` is in the `DataBase` folder |
+| Flask not running | Ensure Python dependencies are installed correctly |
+
+---
+
+## 👨‍💻 **Developers**
+- Vishwajeet Yadav  
+- Omkar Patil  
+- Gautami Pawar  
+- Dipali Mane  
+
+**Under the guidance of:**  
+- Mr. S.Y. Inamader  
+
+---
+
+## 🎯 **Future Improvements**
+- ✅ Improve accuracy of AI model  
+- ✅ Add support for multimedia responses  
+- ✅ Enhance GUI design  
+
+---
+
+## 🏆 **Project Completed!** 🎉
+
+---
