@@ -125,14 +125,8 @@ http://127.0.0.1:5000
 ---
 
 ## 👨‍💻 **Developers**
-- Vishwajeet Yadav  
-- Omkar Patil  
-- Gautami Pawar  
-- Dipali Mane  
-
-**Under the guidance of:**  
-- Mr. S.Y. Inamader  
-
+- Ruturaj Patil
+  
 ---
 
 ## 🎯 **Future Improvements**
