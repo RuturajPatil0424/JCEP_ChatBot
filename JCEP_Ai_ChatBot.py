@@ -42,7 +42,7 @@ def Construct_prompt(content, questions):
 
 
 def ask_finetuned_llama(questionToAsk):
-    desiredModel = 'jcepai'
+    desiredModel = 'llama3.2:3b'
 
     responce = ollama.chat(model=desiredModel, messages=[{'role': 'user', 'content': f'{questionToAsk}'}])
     OllamaResponse = responce['message']['content']

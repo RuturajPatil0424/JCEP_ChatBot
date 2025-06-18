@@ -73,7 +73,7 @@ def get_best_match(user_input):
 
 # Send query to fine-tuned LLaMA model
 def ask_finetuned_llama(questionToAsk):
-    desiredModel = 'jcepai'
+    desiredModel = 'llama3.2:3b'
     response = ollama.chat(model=desiredModel, messages=[{'role': 'user', 'content': f'{questionToAsk}'}])
     OllamaResponse = response['message']['content']
     return OllamaResponse
